@@ -8,7 +8,7 @@ Kyma integrates curated lifestyle experiences into card programs, helping banks 
 
 ## Website
 
-Visit [kyma-lifestyle.com](https://kyma-lifestyle.com)
+Visit [kymalifestyle.com](https://kymalifestyle.com)
 
 ## Contact
 

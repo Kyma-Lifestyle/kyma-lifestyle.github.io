@@ -358,200 +358,73 @@ section {
     margin-right: auto;
 }
 
-/* Problem Statement Section */
-.problem {
+/* Pillar Sections */
+.pillar.engage {
     background: var(--primary-dark);
 }
 
-.problem-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
-}
-
-.problem-card {
-    background: var(--bg-card);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.problem-card:hover {
-    border-color: var(--primary-gold);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-}
-
-.problem-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-}
-
-.problem-card p {
-    color: var(--text-gray);
-    line-height: 1.7;
-}
-
-/* Use Cases Section */
-.use-cases {
+.pillar.sell {
     background: var(--bg-dark);
 }
 
-.use-cases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
-}
-
-.use-case-card {
-    background: var(--bg-card);
-    padding: 2.5rem;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    transition: all 0.3s ease;
-}
-
-.use-case-card:hover {
-    border-color: var(--primary-gold);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-}
-
-.use-case-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-}
-
-.use-case-card p {
-    color: var(--text-gray);
-    line-height: 1.7;
-}
-
-/* Comparison Section */
-.comparison {
+.pillar.analyze {
     background: var(--primary-dark);
 }
 
-.comparison-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
-    margin-top: 4rem;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+.pillar-header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.comparison-card {
-    background: var(--bg-card);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    position: relative;
-}
-
-.comparison-card.without {
-    opacity: 0.7;
-}
-
-.comparison-card.with {
-    border-color: var(--primary-gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-}
-
-.gold-badge {
-    position: absolute;
-    top: -15px;
-    right: 20px;
+.pillar-icon-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
     color: var(--bg-dark);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-}
-
-.comparison-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-light);
-}
-
-.comparison-card ul {
-    list-style: none;
+    font-size: 2.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
 }
 
-.comparison-card li {
-    padding-left: 1.5rem;
-    position: relative;
-    color: var(--text-gray);
-    line-height: 1.6;
-}
-
-.comparison-card li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--primary-gold);
-    font-weight: bold;
-}
-
-.comparison-card.with li::before {
-    content: '✓';
-}
-
-/* Why Kyma Section */
-.why-kyma {
-    background: var(--bg-dark);
-}
-
-.differentiators-grid {
+.pillar-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 4rem;
 }
 
-.differentiator-card {
+.pillar-card {
     background: var(--bg-card);
     padding: 2.5rem;
     border-radius: 12px;
-    text-align: center;
     border: 1px solid rgba(212, 175, 55, 0.1);
+    text-align: center;
     transition: all 0.3s ease;
 }
 
-.differentiator-card:hover {
+.pillar-card:hover {
     border-color: var(--primary-gold);
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
 }
 
-.differentiator-card h3 {
+.pillar-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: var(--text-light);
 }
 
-.differentiator-card p {
+.pillar-card p {
     color: var(--text-gray);
     line-height: 1.7;
 }
 
 /* How It Works Section */
 .how-it-works {
-    background: var(--primary-dark);
+    background: var(--bg-dark);
 }
 
 .steps {
@@ -853,13 +726,7 @@ section {
         font-size: 2rem;
     }
 
-    .problem-grid,
-    .use-cases-grid,
-    .differentiators-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .comparison-grid {
+    .pillar-grid {
         grid-template-columns: 1fr;
     }
 

@@ -30,11 +30,11 @@ window.addEventListener('scroll', () => {
 
 // Chat Animation
 const chatMessages = [
-    { type: 'user', text: "Hi! I want to plan a trip to Europe for our anniversary. Can you help?" },
-    { type: 'kyma', text: "Absolutely! Based on your preferences, I'd recommend 5 nights in Santorini followed by 3 nights in Paris. I can book flights using your reward points and arrange luxury accommodations." },
-    { type: 'user', text: "That sounds perfect. Can you book it using my reward points?" },
-    { type: 'kyma', text: "Done! I've booked your flights and hotels using 45,000 points. You're staying at the Katikies Hotel in Santorini and Le Meurice in Paris. I'll check you in 24 hours before departure and arrange a room decoration for your anniversary." },
-    { type: 'user', text: "Amazing. This is why I love this card." }
+    { type: 'user', text: "Hey, I have 85,000 reward points. Can I get an Amazon gift voucher for a laptop?" },
+    { type: 'kyma', text: "Absolutely! You can redeem 50,000 points for a ₹25,000 Amazon voucher. That covers most mid-range laptops. Want me to process it?" },
+    { type: 'user', text: "Yes please! It's for my new startup, need it for the team." },
+    { type: 'kyma', text: "Done! Voucher sent to your email. Congrats on the startup! By the way, the bank just launched a Startup Business Loan with 2% lower interest for premium cardholders. Want me to share the details?" },
+    { type: 'user', text: "Oh interesting, yes send me the details!" }
 ];
 
 let chatAnimationInterval;
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Observe all cards with updated selectors
-    const cards = document.querySelectorAll('.problem-card, .use-case-card, .comparison-card, .differentiator-card, .team-member, .step');
+    const cards = document.querySelectorAll('.pillar-card, .team-member, .step');
     cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';

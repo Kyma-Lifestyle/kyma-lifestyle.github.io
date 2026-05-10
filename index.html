@@ -39,21 +39,28 @@
         <div class="container">
             <div class="hero-wrapper">
                 <div class="hero-text">
-                    <h1 class="hero-title">
-                        Your AI salesperson for lending.
+                    <h1 class="hero-title" aria-label="Sell Loans in 10 minutes">
+                        <span class="hero-title-line">
+                            Sell
+                            <span class="hero-slot" aria-hidden="true">
+                                <span class="hero-slot-track">
+                                    <span>Loans</span>
+                                    <span>Insurance</span>
+                                    <span>Credit Cards</span>
+                                    <span>Current Accounts</span>
+                                    <span>Savings Accounts</span>
+                                    <span>Loans</span>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="hero-title-line">in 10 minutes</span>
                     </h1>
                     <p class="hero-tagline">
-                        Engages every lead. Reads intent. Sells the right product. Closes the loop.
+                        Qualify, recommend, and close every lead before they drop off
                     </p>
                     <p class="hero-subtitle">
                         Built for NBFCs, PLAs, LSPs and DSAs — Kyma converses with every inbound lead on the channel they're already on, understands what they actually need, cross-sells the right loan, and walks them all the way to a KYC-complete, consented application.
                     </p>
-                    <div class="audience-strip">
-                        <span>NBFCs</span>
-                        <span>PLAs</span>
-                        <span>LSPs</span>
-                        <span>DSAs</span>
-                    </div>
                     <a href="#contact" class="cta-button">Schedule a Demo</a>
                     <div class="channel-strip">
                         <span class="channel live"><i class="fab fa-whatsapp"></i> WhatsApp</span>
@@ -63,21 +70,19 @@
                 </div>
                 <div class="hero-chat">
                     <div class="demo-tabs" id="demoTabs">
-                        <button class="demo-tab active" data-scenario="0">Reads intent. Upsells.</button>
-                        <button class="demo-tab" data-scenario="1">Knows your customer. Cross-sells.</button>
-                        <button class="demo-tab" data-scenario="2">Remembers. Recovers drop-offs.</button>
+                        <button class="demo-tab active" data-scenario="0">Guided Sales</button>
+                        <button class="demo-tab" data-scenario="1">Cross-selling</button>
+                        <button class="demo-tab" data-scenario="2">Follow-ups</button>
                     </div>
                     <div class="chat-container">
                         <div class="chat-header">
                             <div class="chat-logo">KYMA</div>
-                            <div class="chat-status">AI Salesperson · WhatsApp</div>
                         </div>
                         <div class="stage-ribbon" id="stageRibbon"></div>
                         <div class="chat-messages" id="chatMessages">
                             <!-- Messages will be added by JavaScript -->
                         </div>
                     </div>
-                    <p class="demo-channel-caption">Shown on WhatsApp. Same agent runs on voice (soon), web, in-app, SMS.</p>
                 </div>
             </div>
         </div>

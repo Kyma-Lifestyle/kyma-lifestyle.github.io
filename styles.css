@@ -160,6 +160,55 @@ img, video, iframe { max-width: 100%; height: auto; }
     background-clip: text;
 }
 
+.hero-title-line {
+    display: block;
+}
+
+.hero-title-line:first-child {
+    white-space: nowrap;
+}
+
+.hero-slot {
+    --slot-height: 1.2em;
+    display: inline-block;
+    width: 9em;
+    height: var(--slot-height);
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.hero-slot-track {
+    display: flex;
+    flex-direction: column;
+    animation: heroSlotSpin 10s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    background: linear-gradient(135deg, #ffffff 0%, var(--secondary-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-slot-track span {
+    display: block;
+    height: var(--slot-height);
+    line-height: var(--slot-height);
+    white-space: nowrap;
+}
+
+@keyframes heroSlotSpin {
+    0%, 12% { transform: translateY(0); }
+    18%, 30% { transform: translateY(calc(var(--slot-height) * -1)); }
+    36%, 48% { transform: translateY(calc(var(--slot-height) * -2)); }
+    54%, 66% { transform: translateY(calc(var(--slot-height) * -3)); }
+    72%, 84% { transform: translateY(calc(var(--slot-height) * -4)); }
+    90%, 100% { transform: translateY(calc(var(--slot-height) * -5)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slot-track {
+        animation: none;
+    }
+}
+
 .hero-subtitle {
     font-size: 1.2rem;
     color: var(--text-gray);
@@ -1100,9 +1149,9 @@ section {
     border: 1px solid rgba(212, 175, 55, 0.15);
     color: var(--text-gray);
     font-family: inherit;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    padding: 0.55rem 0.5rem;
+    padding: 0.65rem 0.7rem;
     border-radius: 8px;
     cursor: pointer;
     line-height: 1.25;
@@ -1171,11 +1220,6 @@ section {
     color: var(--secondary-gold);
     background: rgba(212, 175, 55, 0.15);
     border-color: rgba(212, 175, 55, 0.4);
-}
-
-.stage.done::before {
-    content: '✓ ';
-    opacity: 0.85;
 }
 
 @keyframes stagePulse {
@@ -1414,6 +1458,17 @@ section {
     .hero-tagline {
         font-size: 1.1rem;
         text-align: center;
+    }
+
+    .hero-title-line:first-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        white-space: normal;
+    }
+
+    .hero-slot {
+        width: min(100%, 9em);
     }
 
     .audience-strip {

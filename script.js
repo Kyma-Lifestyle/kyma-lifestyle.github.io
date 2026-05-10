@@ -34,10 +34,10 @@ window.addEventListener('scroll', () => {
 // ============================================================
 
 const scenarios = [
-    // -------- 0: Reads intent. Upsells. --------
+    // -------- 0: Guided Sales --------
     {
-        title: 'Reads intent. Upsells.',
-        stages: ['Engage', 'Intent', 'Match', 'Consent', 'Offer', 'Close'],
+        title: 'Guided Sales',
+        stages: ['Engage', 'Understand', 'Recommend', 'Close'],
         messages: [
             { from: 'user', type: 'text', text: "Hi, I need a personal loan of around ₹2L for some equipment.", stage: 0 },
             { from: 'kyma', type: 'text', text: "Happy to help! Quick question — is this for personal use or for your work?" },
@@ -45,21 +45,21 @@ const scenarios = [
             { from: 'system', type: 'system', text: "Intent detected · self-employed · working capital", stage: 1 },
             { from: 'kyma', type: 'text', text: "Got it. For business equipment like this, a Business Loan usually works out cheaper than a personal loan — typically 3–4% lower rate, longer tenure. Want me to check what you'd qualify for?", stage: 2 },
             { from: 'user', type: 'text', text: "Oh really? Yes, please." },
-            { from: 'kyma', type: 'consent', text: "Quick consent — I'll need to verify your PAN and pull a soft credit check. No impact on your score.", stage: 3 },
+            { from: 'kyma', type: 'consent', text: "Quick consent — I'll need to verify your PAN and pull a soft credit check. No impact on your score." },
             { from: 'user', type: 'text', text: "[Tapped: I agree]" },
-            { from: 'kyma', type: 'offer', stage: 4, offers: [
+            { from: 'kyma', type: 'offer', offers: [
                 { amount: '₹2,50,000', rate: '14.5%', tenure: '24 mo', label: 'Recommended' },
                 { amount: '₹2,00,000', rate: '13.9%', tenure: '36 mo', label: 'Lower EMI' }
             ]},
             { from: 'user', type: 'text', text: "I'll take the ₹2.5L one." },
-            { from: 'kyma', type: 'text', text: "Done. A credit officer will call you in the next 30 minutes to finalize disbursal. Talk soon, Rahul.", stage: 5 }
+            { from: 'kyma', type: 'text', text: "Done. A credit officer will call you in the next 30 minutes to finalize disbursal. Talk soon, Rahul.", stage: 3 }
         ]
     },
 
-    // -------- 1: Knows your customer. Cross-sells. --------
+    // -------- 1: Cross-selling --------
     {
-        title: 'Knows your customer. Cross-sells.',
-        stages: ['Recognize', 'Context', 'Offer', 'Consent', 'Close'],
+        title: 'Cross-selling',
+        stages: ['Recognize', 'Context', 'Offer', 'Close'],
         messages: [
             { from: 'user', type: 'text', text: "Hey, quick question about my loan.", stage: 0 },
             { from: 'kyma', type: 'text', text: "Hi Priya! I see your Personal Loan PL-4421 — clean repayment history, 14 EMIs done, 10 to go. What's up?" },
@@ -71,16 +71,16 @@ const scenarios = [
                 { amount: '₹4,50,000 BT + top-up', rate: '11.5%', tenure: '36 mo', label: 'Lower rate' }
             ]},
             { from: 'user', type: 'text', text: "The top-up looks easier. Let's do that." },
-            { from: 'kyma', type: 'consent', text: "Re-confirm consent for the top-up disbursal — same KYC on file, no fresh paperwork.", stage: 3 },
+            { from: 'kyma', type: 'consent', text: "Re-confirm consent for the top-up disbursal — same KYC on file, no fresh paperwork." },
             { from: 'user', type: 'text', text: "[Tapped: Confirm]" },
-            { from: 'kyma', type: 'text', text: "Approved. ₹3L will hit your account by tomorrow morning. Anything else, Priya?", stage: 4 }
+            { from: 'kyma', type: 'text', text: "Approved. ₹3L will hit your account by tomorrow morning. Anything else, Priya?", stage: 3 }
         ]
     },
 
-    // -------- 2: Remembers. Recovers drop-offs. --------
+    // -------- 2: Follow-ups --------
     {
-        title: 'Remembers. Recovers drop-offs.',
-        stages: ['Engage', 'KYC paused', 'Return', 'Resume', 'Close'],
+        title: 'Follow-ups',
+        stages: ['Engage', 'KYC Paused', 'Follow-up', 'Complete'],
         messages: [
             { from: 'user', type: 'text', text: "Hi, looking for a ₹5L personal loan.", stage: 0 },
             { from: 'kyma', type: 'text', text: "Sure, can help. Quick PAN check first?" },
@@ -88,13 +88,12 @@ const scenarios = [
             { from: 'kyma', type: 'text', text: "Verified ✓ ABCXX1234F. Pre-approved. Just need a few KYC details." },
             { from: 'kyma', type: 'flow', stage: 1, fields: ['Full name', 'Date of birth', 'Employment type', 'Monthly income', 'Pincode'] },
             { from: 'user', type: 'text', text: "Will fill this in a bit, getting on a call." },
-            { from: 'system', type: 'divider', text: "— 3 days later —", stage: 2 },
-            { from: 'user', type: 'text', text: "Hey, sorry I disappeared." },
-            { from: 'kyma', type: 'text', text: "No worries, Aakash 👋 Last time we were on KYC for your ₹5L pre-approval. Want to pick up there? Takes 90 seconds.", stage: 3 },
-            { from: 'user', type: 'text', text: "Yes please." },
+            { from: 'system', type: 'divider', text: "— 3 hours later —", stage: 2 },
+            { from: 'kyma', type: 'text', text: "Hi Aakash, you're almost done with your ₹5L pre-approval. Want to finish the KYC now? It takes about 90 seconds." },
+            { from: 'user', type: 'text', text: "Yes, let's finish it now." },
             { from: 'kyma', type: 'flow', fields: ['Full name', 'Date of birth', 'Employment type', 'Monthly income', 'Pincode'] },
             { from: 'user', type: 'text', text: "[Submitted]" },
-            { from: 'kyma', type: 'text', text: "All set. Offer locked at 13.2%. Credit officer will call within the hour to release the funds.", stage: 4 }
+            { from: 'kyma', type: 'text', text: "All set. Offer locked at 13.2%. Credit officer will call within the hour to release the funds.", stage: 3 }
         ]
     }
 ];

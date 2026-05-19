@@ -14,16 +14,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Add scroll effect to navbar
 const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset <= 0) {
-        navbar.style.boxShadow = 'none';
-    } else {
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.5)';
-    }
-});
+const navContent = document.querySelector('.nav-content');
+const navToggle = document.querySelector('.nav-toggle');
+const heroFigure = document.querySelector('.hero-figure');
+const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+function syncNavbarState() {
+    if (!navbar) return;
+    navbar.classList.toggle('is-scrolled', window.pageYOffset > 0);
+}
+
+function syncHeroFigure() {
+    if (!heroFigure || motionQuery.matches) return;
+    const scrollProgress = Math.min(window.pageYOffset / 520, 1);
+    const bounce = Math.sin(scrollProgress * Math.PI) * 18;
+    heroFigure.style.setProperty('--hero-figure-y', `${Math.round(bounce - scrollProgress * 36)}px`);
+}
+
+syncNavbarState();
+syncHeroFigure();
+window.addEventListener('scroll', syncNavbarState);
+window.addEventListener('scroll', syncHeroFigure, { passive: true });
+
+if (navContent && navToggle) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = navContent.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    navContent.querySelectorAll('.nav-links a').forEach((link) => {
+        link.addEventListener('click', () => {
+            navContent.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Open menu');
+        });
+    });
+}
 
 // ============================================================
-// AI Salesperson Demo — three tabbed scenarios
+// AI Salesperson Demo — campaign-driven scenarios
 // ============================================================
 //
 // Each message is { from, type, text, fields?, options?, stage? }
@@ -56,9 +85,31 @@ const scenarios = [
         ]
     },
 
-    // -------- 1: Cross-selling --------
+    // -------- 1: Drop-off Recovery --------
     {
-        title: 'Cross-selling',
+        title: 'Drop-off Recovery',
+        stages: ['Detect', 'Resume', 'Collect', 'Handoff'],
+        messages: [
+            { from: 'system', type: 'system', text: "Lead paused at income details · 2 hours inactive", stage: 0 },
+            { from: 'kyma', type: 'text', text: "Hi Neha, your ₹4L personal loan check is almost done. Want to finish the last two details now? It takes under a minute.", stage: 1 },
+            { from: 'user', type: 'text', text: "Yes, I got stuck on salary details." },
+            { from: 'kyma', type: 'text', text: "No problem. Share your monthly in-hand salary and employer type. I will keep the application where you left it." },
+            { from: 'user', type: 'text', text: "₹68,000. Private company." },
+            { from: 'kyma', type: 'flow', stage: 2, fields: ['Monthly income', 'Employer type', 'Salary account bank'] },
+            { from: 'user', type: 'text', text: "[Submitted]" },
+            { from: 'system', type: 'system', text: "Eligibility refreshed · offer unlocked" },
+            { from: 'kyma', type: 'offer', offers: [
+                { amount: '₹4,00,000', rate: '13.4%', tenure: '36 mo', label: 'Best match' },
+                { amount: '₹3,50,000', rate: '12.9%', tenure: '30 mo', label: 'Lower EMI' }
+            ]},
+            { from: 'user', type: 'text', text: "First option works." },
+            { from: 'kyma', type: 'text', text: "Locked. I have sent the file to the credit team with your updated details. They will call in 20 minutes.", stage: 3 }
+        ]
+    },
+
+    // -------- 2: Cross-sell / Top-up --------
+    {
+        title: 'Cross-sell / Top-up',
         stages: ['Recognize', 'Context', 'Offer', 'Close'],
         messages: [
             { from: 'user', type: 'text', text: "Hey, quick question about my loan.", stage: 0 },
@@ -77,22 +128,20 @@ const scenarios = [
         ]
     },
 
-    // -------- 2: Follow-ups --------
+    // -------- 3: KYC Completion --------
     {
-        title: 'Follow-ups',
-        stages: ['Engage', 'KYC Paused', 'Follow-up', 'Complete'],
+        title: 'KYC Completion',
+        stages: ['Pre-approved', 'KYC', 'Consent', 'Complete'],
         messages: [
-            { from: 'user', type: 'text', text: "Hi, looking for a ₹5L personal loan.", stage: 0 },
-            { from: 'kyma', type: 'text', text: "Sure, can help. Quick PAN check first?" },
-            { from: 'user', type: 'text', text: "ABCPK1234F" },
-            { from: 'kyma', type: 'text', text: "Verified ✓ ABCXX1234F. Pre-approved. Just need a few KYC details." },
+            { from: 'system', type: 'system', text: "Pre-approved borrower · KYC pending", stage: 0 },
+            { from: 'kyma', type: 'text', text: "Hi Aakash, your ₹5L loan is pre-approved. Only KYC is pending now. Want to finish it on WhatsApp?" },
+            { from: 'user', type: 'text', text: "Yes, let's do it." },
+            { from: 'kyma', type: 'text', text: "Great. I will collect the basics first, then send consent for final verification.", stage: 1 },
             { from: 'kyma', type: 'flow', stage: 1, fields: ['Full name', 'Date of birth', 'Employment type', 'Monthly income', 'Pincode'] },
-            { from: 'user', type: 'text', text: "Will fill this in a bit, getting on a call." },
-            { from: 'system', type: 'divider', text: "— 3 hours later —", stage: 2 },
-            { from: 'kyma', type: 'text', text: "Hi Aakash, you're almost done with your ₹5L pre-approval. Want to finish the KYC now? It takes about 90 seconds." },
-            { from: 'user', type: 'text', text: "Yes, let's finish it now." },
-            { from: 'kyma', type: 'flow', fields: ['Full name', 'Date of birth', 'Employment type', 'Monthly income', 'Pincode'] },
             { from: 'user', type: 'text', text: "[Submitted]" },
+            { from: 'kyma', type: 'consent', text: "Consent to verify KYC and share your application with the credit desk for final approval?", stage: 2 },
+            { from: 'user', type: 'text', text: "[Tapped: I agree]" },
+            { from: 'system', type: 'system', text: "KYC complete · application ready" },
             { from: 'kyma', type: 'text', text: "All set. Offer locked at 13.2%. Credit officer will call within the hour to release the funds.", stage: 3 }
         ]
     }

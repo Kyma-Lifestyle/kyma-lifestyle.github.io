@@ -10,7 +10,7 @@ Live on WhatsApp today, voice next, cross-platform from day one.
 
 ## Website
 
-Visit [kymalifestyle.com](https://kymalifestyle.com)
+Visit [kymahq.com](https://kymahq.com)
 
 ## Contact
 
